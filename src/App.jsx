@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
-import ContributionChart from "./ContributionChart.jsx";
+import ContributionBarChartPackage from "./ContributionBarChartPackage.jsx";
+import ContributionBarChartComparison from "./ContributionBarChartComparison.jsx";
 
 function App() {
     const [data, setData] = useState(null);
@@ -19,7 +20,7 @@ function App() {
             ) : (
                 <p>Loading data...</p>
             )}
-            <ContributionChart />
+            <ContributionBarChartComparison />
         </div>
 
     );
