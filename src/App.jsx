@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import ContributionBarChartPackage from "./ContributionBarChartPackage.jsx";
-import ContributionBarChartComparison from "./ContributionBarChartComparison.jsx";
+import ContributionBarChartSelectors from "./ContributionBarChartSelectors.jsx";
+import ContributionBarChart from "./ContributionBarChart.jsx";
 
 function App() {
     const [data, setData] = useState(null);
@@ -14,13 +14,13 @@ function App() {
 
     return (
         <div style={{ padding: "2rem" }}>
-            <h1>React + Python API</h1>
+            <h1>Temp Title</h1>
             {data ? (
-                <pre>{JSON.stringify(data.slice(0, 2), null, 2)}</pre>
+                <p>data Loaded.</p>
             ) : (
                 <p>Loading data...</p>
             )}
-            <ContributionBarChartComparison />
+            <ContributionBarChart />
         </div>
 
     );
