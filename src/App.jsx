@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import ContributionBarChartSelectors from "./ContributionBarChartSelectors.jsx";
 import ContributionBarChart from "./ContributionBarChart.jsx";
+import ContributionBarChartOriginal from "./legacy/ContributionBarChartOriginal.jsx";
 
 function App() {
     const [data, setData] = useState(null);
@@ -21,6 +21,7 @@ function App() {
                 <p>Loading data...</p>
             )}
             <ContributionBarChart />
+            {/*<ContributionBarChartOriginal />*/}
         </div>
 
     );

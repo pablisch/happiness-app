@@ -1,9 +1,9 @@
 import RadioSelector from "./RadioSelector";
 import DropdownSelector from "./DropdownSelector";
+import CheckboxSelector from "./CheckboxSelector";
 import { EU_COUNTRIES } from "./data/euCountries";
 
 const geoAreaOptions = [
-    { label: "EU (average across member states)", value: "EU" },
     ...EU_COUNTRIES.map((c) => ({ label: c, value: c })),
 ];
 
@@ -13,14 +13,27 @@ const yearOptions = [
     { label: "2023", value: "2023" },
 ];
 
-function ContributionBarChartSelectors({ geoArea, year, onGeoAreaChange, onYearChange }) {
+function ContributionBarChartSelectors({
+                                           geoArea,
+                                           year,
+                                           showEU,
+                                           onGeoAreaChange,
+                                           onYearChange,
+                                           onShowEUChange,
+                                       }) {
     return (
         <div style={{ marginTop: "1rem" }}>
             <DropdownSelector
-                title="Select Geo Area:"
+                title="Select Country:"
                 value={geoArea}
                 options={geoAreaOptions}
                 onChange={onGeoAreaChange}
+            />
+
+            <CheckboxSelector
+                label="Show EU average"
+                checked={showEU}
+                onChange={onShowEUChange}
             />
 
             <RadioSelector
