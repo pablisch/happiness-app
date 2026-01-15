@@ -1,6 +1,8 @@
 import { useEffect, useState } from "react";
+import {useSelectorContext} from "../context/SelectorContext.js";
 
-function ContributionBarChartImage({ geoArea, year, showEU }) {
+function ContributionBarChartImage() {
+    const { geoArea, showEU, year } = useSelectorContext();
     const [title, setTitle] = useState("");
     const [error, setError] = useState(null);
 
@@ -49,10 +51,8 @@ function ContributionBarChartImage({ geoArea, year, showEU }) {
                     <div style={{ fontSize: "0.9rem" }}>{error}</div>
                 </div>
             ) : (
-                <h3 style={{ margin: "0 0 0.75rem 0" }}>
-                    {title.split("\n").map((line, i) => (
-                        <div key={i}>{line}</div>
-                    ))}
+                <h3 style={{ margin: "0 0 0.75rem 0", whiteSpace: "pre-line" }}>
+                    {title || "Loading title..."}
                 </h3>
             )}
 

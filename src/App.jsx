@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
-import ContributionBarChart from "./ContributionBarChart.jsx";
-import ContributionBarChartOriginal from "./legacy/ContributionBarChartOriginal.jsx";
+import ContributionBarChart from "./ContributionBarChart/ContributionBarChart.jsx";
+import {SelectorProvider} from "./context/SelectorProvider.jsx";
 
 function App() {
     const [data, setData] = useState(null);
@@ -13,6 +13,7 @@ function App() {
     }, []);
 
     return (
+        <SelectorProvider>
         <div style={{ padding: "2rem" }}>
             <h1>Temp Title</h1>
             {data ? (
@@ -21,9 +22,8 @@ function App() {
                 <p>Loading data...</p>
             )}
             <ContributionBarChart />
-            {/*<ContributionBarChartOriginal />*/}
         </div>
-
+        </SelectorProvider>
     );
 }
 
