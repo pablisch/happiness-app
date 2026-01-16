@@ -1,5 +1,5 @@
 import RadioSelector from "../RadioSelector.jsx";
-import { useSelectorContext } from "../context/SelectorContext.js";
+import { useSelectorContext } from "../Context/SelectorContext.js";
 
 const yearOptions = [
     { label: "2021", value: "2021" },
@@ -7,7 +7,7 @@ const yearOptions = [
     { label: "2023", value: "2023" },
 ];
 
-function ContributionBarChartYearSelector() {
+function YearSelector() {
     const { year, setYear } = useSelectorContext();
 
     return (
@@ -21,4 +21,4 @@ function ContributionBarChartYearSelector() {
     );
 }
 
-export default ContributionBarChartYearSelector;
+export default YearSelector;

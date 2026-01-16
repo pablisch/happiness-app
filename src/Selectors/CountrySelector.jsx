@@ -1,20 +1,20 @@
 import DropdownSelector from "../DropdownSelector.jsx";
 import { EU_COUNTRIES } from "../data/euCountries.js";
-import {useSelectorContext} from "../context/SelectorContext.js";
+import {useSelectorContext} from "../Context/SelectorContext.js";
 
 const countryOptions = EU_COUNTRIES.map((c) => ({ label: c, value: c }));
 
-function ContributionBarChartCountrySelector() {
-    const { geoArea, setGeoArea } = useSelectorContext();
+function CountrySelector() {
+    const { country, setCountry } = useSelectorContext();
 
     return (
             <DropdownSelector
                 title="Select Country:"
-                value={geoArea}
+                value={country}
                 options={countryOptions}
-                onChange={setGeoArea}
+                onChange={setCountry}
             />
     );
 }
 
-export default ContributionBarChartCountrySelector;
+export default CountrySelector;

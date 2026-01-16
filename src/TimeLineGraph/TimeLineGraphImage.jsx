@@ -1,8 +1,8 @@
 import { useEffect, useState } from "react";
-import { useSelectorContext } from "../Context/selectorContext.js";
+import { useSelectorContext } from "../context/SelectorContext.js";
 
-function ContributionBarChartImage() {
-    const { country, year, showEU, fixedScale } = useSelectorContext();
+function TimeLineGraphImage() {
+    const { country, showEU, fixedScale } = useSelectorContext();
 
     const [title, setTitle] = useState("");
     const [error, setError] = useState(null);
@@ -11,9 +11,15 @@ function ContributionBarChartImage() {
     const showEUParam = showEU ? "true" : "false";
     const fixedScaleParam = fixedScale ? "true" : "false";
 
+    const metaUrl =
+        `http://127.0.0.1:8000/timeline_meta/${encodedCountry}` +
+        `?show_eu=${showEUParam}&fixed_scale=${fixedScaleParam}`;
 
-    const metaUrl = `http://127.0.0.1:8000/contrib_bar_meta/${encodedCountry}/${year}?show_eu=${showEUParam}&fixed_scale=${fixedScaleParam}`;
-    const imgUrl  = `http://127.0.0.1:8000/contrib_bar/${encodedCountry}/${year}?show_eu=${showEUParam}&fixed_scale=${fixedScaleParam}&v=${encodedCountry}-${year}-${showEUParam}-${fixedScaleParam}`;
+    const imgUrl =
+        `http://127.0.0.1:8000/timeline/${encodedCountry}` +
+        `?show_eu=${showEUParam}&fixed_scale=${fixedScaleParam}` +
+        `&v=${encodedCountry}-${showEUParam}-${fixedScaleParam}`;
+
     useEffect(() => {
         let cancelled = false;
 
@@ -50,7 +56,7 @@ function ContributionBarChartImage() {
 
             <img
                 src={imgUrl}
-                alt={title || `Factor contributions for ${country} in ${year}`}
+                alt={title || `Happiness over time for ${country}`}
                 style={{ maxWidth: "650px" }}
                 onError={() => console.log("Image failed to load:", imgUrl)}
             />
@@ -58,4 +64,4 @@ function ContributionBarChartImage() {
     );
 }
 
-export default ContributionBarChartImage;
+export default TimeLineGraphImage;

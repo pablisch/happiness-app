@@ -1,21 +1,24 @@
 import { useMemo, useState } from "react";
-import { SelectorContext } from "./selectorContext.js";
+import { SelectorContext } from "./SelectorContext.js";
 
 export function SelectorProvider({ children }) {
     const [year, setYear] = useState("2021");
-    const [geoArea, setGeoArea] = useState("France");
-    const [showEU, setShowEU] = useState(false);
+    const [country, setCountry] = useState("France");
+    const [showEU, setShowEU] = useState(true);
+    const [fixedScale, setFixedScale] = useState(true);
 
     const value = useMemo(
         () => ({
-            geoArea,
-            setGeoArea,
+            country,
+            setCountry,
             year,
             setYear,
             showEU,
             setShowEU,
+            fixedScale,
+            setFixedScale,
         }),
-        [geoArea, year, showEU]
+        [country, year, showEU, fixedScale]
     );
 
     return (

@@ -1,7 +1,7 @@
 import CheckboxSelector from "../CheckboxSelector.jsx";
-import {useSelectorContext} from "../context/SelectorContext.js";
+import {useSelectorContext} from "../Context/SelectorContext.js";
 
-function ContributionBarChartShowEuCheckbox() {
+function ShowEuCheckbox() {
     const { showEU, setShowEU } = useSelectorContext();
 
     return (
@@ -13,4 +13,4 @@ function ContributionBarChartShowEuCheckbox() {
     );
 }
 
-export default ContributionBarChartShowEuCheckbox;
+export default ShowEuCheckbox;

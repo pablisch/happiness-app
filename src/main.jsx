@@ -1,7 +1,7 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import App from "./App.jsx";
-import { SelectorProvider } from "./context/SelectorProvider.jsx";
+import { SelectorProvider } from "./Context/SelectorProvider.jsx";
 
 import "./index.css";
 
