@@ -49,7 +49,7 @@ function TimeLineGraphImage() {
         const imgUrl =
             `http://127.0.0.1:8000/timeline/${encodedCountry}` +
             `?show_eu=${showEUParam}&fixed_scale=${fixedScaleParam}` +
-            `&w=${size.w}&h=${size.h}` +
+            `` +
             `&v=${encodedCountry}-${showEUParam}-${fixedScaleParam}-${size.w}x${size.h}`;
 
         return { metaUrl, imgUrl };

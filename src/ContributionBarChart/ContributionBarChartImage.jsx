@@ -52,7 +52,7 @@ function ContributionBarChartImage() {
         const imgUrl =
             `http://127.0.0.1:8000/contrib_bar/${encodedCountry}/${year}` +
             `?show_eu=${showEUParam}&fixed_scale=${fixedScaleParam}` +
-            `&w=${size.w}&h=${size.h}` +
+            `` +
             `&v=${encodedCountry}-${year}-${showEUParam}-${fixedScaleParam}-${size.w}x${size.h}`;
 
         return { metaUrl, imgUrl };
