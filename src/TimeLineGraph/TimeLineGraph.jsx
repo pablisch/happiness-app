@@ -2,8 +2,7 @@ import TimeLineGraphImage from "./TimeLineGraphImage.jsx";
 
 function TimeLineGraph() {
     return (
-        <div style={{ marginTop: "2rem" }}>
-            <h2>Happiness Over Time</h2>
+        <div style={{ height: "100%", display: "flex", flexDirection: "column", minHeight: 0 }}>
             <TimeLineGraphImage />
         </div>
     );

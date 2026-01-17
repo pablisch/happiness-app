@@ -1,19 +1,63 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useRef, useState } from "react";
 import { useSelectorContext } from "../Context/selectorContext.js";
+
+function clamp(n, lo, hi) {
+    return Math.max(lo, Math.min(hi, n));
+}
 
 function ContributionBarChartImage() {
     const { country, year, showEU, fixedScale } = useSelectorContext();
 
+    const wrapRef = useRef(null);
+    const [size, setSize] = useState({ w: 720, h: 260 });
+
     const [title, setTitle] = useState("");
     const [error, setError] = useState(null);
 
-    const encodedCountry = encodeURIComponent(country);
-    const showEUParam = showEU ? "true" : "false";
-    const fixedScaleParam = fixedScale ? "true" : "false";
+    // Measure the *panel* size (stable), not an inner div with unknown height
+    useEffect(() => {
+        const wrap = wrapRef.current;
+        if (!wrap) return;
 
+        const panel = wrap.closest(".panel") || wrap;
 
-    const metaUrl = `http://127.0.0.1:8000/contrib_bar_meta/${encodedCountry}/${year}?show_eu=${showEUParam}&fixed_scale=${fixedScaleParam}`;
-    const imgUrl  = `http://127.0.0.1:8000/contrib_bar/${encodedCountry}/${year}?show_eu=${showEUParam}&fixed_scale=${fixedScaleParam}&v=${encodedCountry}-${year}-${showEUParam}-${fixedScaleParam}`;
+        const ro = new ResizeObserver((entries) => {
+            const cr = entries[0]?.contentRect;
+            if (!cr) return;
+
+            // Leave room for title (and a bit of padding)
+            const usableW = Math.floor(cr.width);
+            const usableH = Math.floor(cr.height);
+
+            // Chart image height: panel height minus ~28px title + small gap
+            const imgW = clamp(usableW, 300, 2000);
+            const imgH = clamp(usableH - 28 - 6, 150, 1600);
+
+            setSize({ w: imgW, h: imgH });
+        });
+
+        ro.observe(panel);
+        return () => ro.disconnect();
+    }, []);
+
+    const { metaUrl, imgUrl } = useMemo(() => {
+        const encodedCountry = encodeURIComponent(country);
+        const showEUParam = showEU ? "true" : "false";
+        const fixedScaleParam = fixedScale ? "true" : "false";
+
+        const metaUrl =
+            `http://127.0.0.1:8000/contrib_bar_meta/${encodedCountry}/${year}` +
+            `?show_eu=${showEUParam}&fixed_scale=${fixedScaleParam}`;
+
+        const imgUrl =
+            `http://127.0.0.1:8000/contrib_bar/${encodedCountry}/${year}` +
+            `?show_eu=${showEUParam}&fixed_scale=${fixedScaleParam}` +
+            `&w=${size.w}&h=${size.h}` +
+            `&v=${encodedCountry}-${year}-${showEUParam}-${fixedScaleParam}-${size.w}x${size.h}`;
+
+        return { metaUrl, imgUrl };
+    }, [country, year, showEU, fixedScale, size.w, size.h]);
+
     useEffect(() => {
         let cancelled = false;
 
@@ -36,24 +80,20 @@ function ContributionBarChartImage() {
     }, [metaUrl]);
 
     return (
-        <div style={{ textAlign: "center", marginTop: "1.5rem" }}>
-            {error ? (
-                <div style={{ marginBottom: "0.75rem" }}>
-                    <strong>Chart title unavailable</strong>
-                    <div style={{ fontSize: "0.9rem" }}>{error}</div>
-                </div>
-            ) : (
-                <h3 style={{ margin: "0 0 0.75rem 0", whiteSpace: "pre-line" }}>
-                    {title || "Loading title..."}
-                </h3>
-            )}
+        <div ref={wrapRef} className="chart-image-wrap">
+            <div className="chart-image-title">
+                {error ? "Chart title unavailable" : (title || "Loading…")}
+            </div>
 
-            <img
-                src={imgUrl}
-                alt={title || `Factor contributions for ${country} in ${year}`}
-                style={{ maxWidth: "650px" }}
-                onError={() => console.log("Image failed to load:", imgUrl)}
-            />
+            <div className="chart-image-frame">
+                <img
+                    className="chart-image"
+                    src={imgUrl}
+                    alt={title || `Factor contributions for ${country} in ${year}`}
+                    loading="lazy"
+                    decoding="async"
+                />
+            </div>
         </div>
     );
 }

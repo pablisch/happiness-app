@@ -8,13 +8,15 @@ function CountrySelector() {
     const { country, setCountry } = useSelectorContext();
 
     return (
-            <DropdownSelector
-                title="Select Country:"
-                value={country}
-                options={countryOptions}
-                onChange={setCountry}
-            />
+        <DropdownSelector
+            title="Country:"
+            value={country}
+            options={countryOptions}
+            onChange={setCountry}
+            variant="toolbar"
+        />
     );
+
 }
 
 export default CountrySelector;

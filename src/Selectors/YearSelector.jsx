@@ -13,12 +13,14 @@ function YearSelector() {
     return (
         <RadioSelector
             name="year"
-            title="Select Year:"
+            title="Year:"
             options={yearOptions}
             value={year}
             onChange={setYear}
+            variant="toolbar"
         />
     );
+
 }
 
 export default YearSelector;
