@@ -10,6 +10,7 @@ import ScoreCard from "./ScoreCard/ScoreCard.jsx";
 import FactorDonut from "./Donut/FactorDonut.jsx";
 import ContributionBarChart from "./ContributionBarChart/ContributionBarChart.jsx";
 import TimeLineGraph from "./TimeLineGraph/TimeLineGraph.jsx";
+import MapPanel from "./Map/MapPanel.jsx";
 
 function App() {
     return (
@@ -27,8 +28,7 @@ function App() {
             </section>
 
             <section className="block">
-                <h2>Map</h2>
-                <EUMap />
+                <MapPanel />
             </section>
 
             <section className="block">

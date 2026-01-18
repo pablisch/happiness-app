@@ -78,21 +78,24 @@ function TimeLineGraphImage() {
 
     return (
         <div ref={wrapRef} className="chart-image-wrap">
-            <div className="chart-image-title">
-                {error ? "Chart title unavailable" : (title || "Loading…")}
-            </div>
+            <div className="chart-image-inner">
+                <div className="chart-image-title">
+                    {error ? "Chart title unavailable" : (title || "Loading…")}
+                </div>
 
-            <div className="chart-image-frame">
-                <img
-                    className="chart-image"
-                    src={imgUrl}
-                    alt={title || `Happiness over time for ${country}`}
-                    loading="lazy"
-                    decoding="async"
-                />
+                <div className="chart-image-frame">
+                    <img
+                        className="chart-image"
+                        src={imgUrl}
+                        alt={title || `Happiness over time for ${country}`}
+                        loading="lazy"
+                        decoding="async"
+                    />
+                </div>
             </div>
         </div>
     );
+
 }
 
 export default TimeLineGraphImage;

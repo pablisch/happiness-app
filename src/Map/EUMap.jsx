@@ -18,6 +18,8 @@ const MAP_CENTER_LAT = 55;
 const MAP_SCALE = 560;
 /* ------------------------------------------------------- */
 
+const SVG_CROP_TOP = 0; // tweak 60–120
+
 function getIso2(props) {
     if (!props) return null;
 
@@ -239,8 +241,6 @@ function EUMap() {
 
     return (
         <div style={{ marginTop: "2rem" }}>
-            <h2>Map</h2>
-
             <div
                 style={{
                     width: MAP_WIDTH,
@@ -324,7 +324,7 @@ function EUMap() {
                     viewBox={`0 0 ${MAP_WIDTH} ${MAP_HEIGHT}`}
                     width="100%"
                     height="100%"
-                    preserveAspectRatio="xMidYMid meet"
+                    preserveAspectRatio="xMidYMin meet"
                 >
                     {paths.map((p) => {
                         const isEU = p.iso2 && EU_ISO2.has(p.iso2);
