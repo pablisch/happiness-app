@@ -70,7 +70,7 @@ function FactorDonut() {
         <div style={{ marginTop: "2rem" }}>
             {/* Selector first (left aligned, as-is) */}
             <DropdownSelector
-                title="Select Factor:"
+                title="Contributory Factor:"
                 value={factor}
                 options={FACTOR_OPTIONS}
                 onChange={setFactor}
