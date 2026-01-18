@@ -39,7 +39,7 @@ function FactorDonut() {
     }, [factor, year]);
 
     const factorLabel = FACTOR_LABELS[factor] ?? factor;
-    const title = `Distribution of ${factorLabel} in ${year} for ${country}`;
+    const title = `Distribution of ${factorLabel} in ${year} across the EU`;
 
 
     useEffect(() => {
