@@ -15,9 +15,14 @@ function App() {
     return (
         <div className="page">
             <header className="header">
-                <h1>Happiness Dashboard</h1>
-                <p>European countries — factors &amp; trends</p>
+                <h1>
+                    Happiness Across the EU
+                    <span className="subtitle-inline">
+            — Drivers and trends in national happiness scores
+        </span>
+                </h1>
             </header>
+
 
             <section className="controls">
                 <div className="control-item control-country">
@@ -58,7 +63,7 @@ function App() {
             </section>
 
             <footer className="footer">
-                Data: World Happiness dataset — UI prototype
+                Data: World Happiness datasets from 2021, 2022 and 2023 and data from ...
             </footer>
         </div>
     );

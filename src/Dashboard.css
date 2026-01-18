@@ -111,3 +111,18 @@ body {
     width: 18px;
     height: 18px;
 }
+
+
+.header h1 {
+    margin: 0;
+    font-size: 22px;
+    font-weight: 700;
+    line-height: 1.25;
+}
+
+.subtitle-inline {
+    font-size: 18px;   /* smaller than main title */
+    font-weight: 500;
+    color: #666;
+    margin-left: 6px;
+}
