@@ -74,6 +74,7 @@ function FactorDonut() {
                 value={factor}
                 options={FACTOR_OPTIONS}
                 onChange={setFactor}
+                variant="toolbar"
             />
 
             {/* small gap */}
