@@ -5,7 +5,6 @@ import ShowEuCheckbox from "./Selectors/ShowEuCheckbox.jsx";
 import YearSelector from "./Selectors/YearSelector.jsx";
 import FixedScaleCheckbox from "./Selectors/fixedScaleCheckbox.jsx";
 
-import EUMap from "./Map/EUMap.jsx";
 import ScoreCard from "./ScoreCard/ScoreCard.jsx";
 import FactorDonut from "./Donut/FactorDonut.jsx";
 import ContributionBarChart from "./ContributionBarChart/ContributionBarChart.jsx";
@@ -21,10 +20,21 @@ function App() {
             </header>
 
             <section className="controls">
-                <CountrySelector />
-                <ShowEuCheckbox />
-                <YearSelector />
-                <FixedScaleCheckbox />
+                <div className="control-item control-country">
+                    <CountrySelector />
+                </div>
+
+                <div className="control-item control-checkbox checkbox-lg">
+                    <ShowEuCheckbox />
+                </div>
+
+                <div className="control-item control-year">
+                    <YearSelector />
+                </div>
+
+                <div className="control-item control-checkbox checkbox-lg">
+                    <FixedScaleCheckbox />
+                </div>
             </section>
 
             <section className="block">

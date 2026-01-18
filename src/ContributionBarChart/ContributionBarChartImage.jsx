@@ -80,24 +80,22 @@ function ContributionBarChartImage() {
     }, [metaUrl]);
 
     return (
-        <div ref={wrapRef} className="chart-image-wrap">
-            <div className="chart-image-inner">
-                <div className="chart-image-title">
-                    {error ? "Chart title unavailable" : (title || "Loading…")}
-                </div>
-
-                <div className="chart-image-frame">
-                    <img
-                        className="chart-image"
-                        src={imgUrl}
-                        alt={title || `Factor contributions for ${country} in ${year}`}
-                        loading="lazy"
-                        decoding="async"
-                    />
-                </div>
+        <div ref={wrapRef} className="chart-image-block">
+            <div className="chart-image-title">
+                {error ? "Chart title unavailable" : (title || "Loading…")}
             </div>
+
+            <img
+                className="chart-image"
+                src={imgUrl}
+                alt={title || `Factor contributions for ${country} in ${year}`}
+                loading="lazy"
+                decoding="async"
+            />
         </div>
     );
+
+
 
 
 }

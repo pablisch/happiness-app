@@ -1,5 +1,8 @@
-/* Minimal, safe layout */
+/* =========================
+   CLEAN, CONSOLIDATED CSS
+   ========================= */
 
+/* Base page layout */
 body {
     margin: 0;
     font-family: system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
@@ -24,10 +27,13 @@ body {
 
 .controls {
     display: flex;
-    flex-wrap: wrap;
-    gap: 12px;
-    margin-bottom: 24px;
+    flex-direction: column;  /* stack vertically */
+    gap: 30px;               /* space between each control */
+    margin-bottom: 40px;
+    margin-top: 40px;
+    align-items: flex-start; /* keep everything left-aligned */
 }
+
 
 .block {
     margin-bottom: 32px;
@@ -38,92 +44,70 @@ body {
     font-size: 18px;
 }
 
-.block img,
-.block svg,
-.block canvas {
-    max-width: 100%;
-    height: auto;
-    display: block;
-}
-
 .footer {
     margin-top: 40px;
     font-size: 12px;
     color: #777;
 }
 
-.map-panel-wrap{
-    height: 100%;
+/* =========================
+   MAP
+   ========================= */
+
+.map-panel-wrap {
     width: 100%;
     display: flex;
     flex-direction: column;
 }
 
-.map-panel-title{
+.map-panel-title {
     text-align: center;
     font-weight: 700;
     font-size: 17px;
     line-height: 1.2;
-    /*margin: 0 0 10px 0;*/
 }
 
-.map-panel-body{
-    flex: 1 1 auto;
-    min-height: 0;
-    /*background: rgba(255,0,0,0.05);*/
-    margin-top: -20px;
+.map-panel-body {
+    margin-top: -20px; /* intentional trim of SVG container */
 }
 
-/* Scale backend-rendered charts only (not their titles) */
-.chart-image-frame {
-    transform: scale(0.65);
-    transform-origin: top left;
+/* BAR CHART – FINAL, CORRECT VERSION */
 
-    /* compensate so the scaled image still fits the layout width */
-    width: calc(100% / 0.65);
+.chart-image-block{
+    display: inline-block;   /* shrink-wraps to image width */
+    text-align: center;      /* centers title over image */
 }
 
+/* Title */
 .chart-image-title{
-    text-align: center;
     font-weight: 700;
     font-size: 17px;
     line-height: 1.2;
-
-    /* Match the scaled chart width */
-    width: calc(100% / 0.65);
-    margin: 0 auto 6px auto;
+    margin-bottom: 8px;
+    width: 700px;
+    white-space: pre-line;
 }
 
-/* Chart image block: keep left aligned */
-.chart-image-wrap{
-    width: 100%;
-    text-align: left;   /* important: prevents "center the whole thing" */
-}
-
-/* This is the KEY: shrink-wrap width to image width */
-.chart-image-inner{
-    display: inline-block;  /* width becomes the content (the image) */
-}
-
-/* Title should match map title style */
-.chart-image-title{
-    text-align: center;
-    font-weight: 700;
-    font-size: 17px;
-    line-height: 1.2;
-    margin: 0 0 10px 0;
-}
-
-/* IMPORTANT: frame must NOT stretch wider than the image */
-.chart-image-frame{
-    display: inline-block;  /* stop it becoming 1100px wide */
-}
-
-/* Image keeps its own natural width (or whatever your scaling sets) */
+/* Image scaled via WIDTH, not transform */
 .chart-image{
-    display: block;          /* remove baseline gap */
-    max-width: 100%;
+    display: block;
+    width: 65%;              /* THIS is the key */
     height: auto;
 }
 
+/* Left-aligned block that shrink-wraps to the donut width */
+.donut-block{
+    display: inline-block;   /* shrink-wrap to donut width */
+    text-align: center;      /* center title over donut */
+}
 
+/* Ensure donut stays the natural size and centered under the title */
+.donut-wrap{
+    display: inline-block;
+}
+
+/* Only enlarge the checkbox itself, not the label text */
+.checkbox-lg input[type="checkbox"]{
+    width: 18px;
+    height: 18px;
+}

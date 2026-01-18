@@ -14,6 +14,17 @@ const FACTOR_OPTIONS = [
     { label: "Other", value: "other" },
 ];
 
+const FACTOR_LABELS = {
+    combined_score: "Happiness (combined score)",
+    GDP: "GDP",
+    social_support: "Social support",
+    life_expectancy: "Life expectancy",
+    freedom: "Freedom",
+    generosity: "Generosity",
+    corruption: "Corruption",
+    other: "Other",
+};
+
 function FactorDonut() {
     const { country, year, setCountry } = useSelectorContext();
 
@@ -26,6 +37,10 @@ function FactorDonut() {
         const f = encodeURIComponent(factor);
         return `http://127.0.0.1:8000/donut/${f}/${year}?eu_only=true&group_other=false`;
     }, [factor, year]);
+
+    const factorLabel = FACTOR_LABELS[factor] ?? factor;
+    const title = `Distribution of ${factorLabel} in ${year} for ${country}`;
+
 
     useEffect(() => {
         let cancelled = false;
@@ -53,7 +68,7 @@ function FactorDonut() {
 
     return (
         <div style={{ marginTop: "2rem" }}>
-            {/* Selector – visually identical to CountrySelector */}
+            {/* Selector first (left aligned, as-is) */}
             <DropdownSelector
                 title="Select Factor:"
                 value={factor}
@@ -61,33 +76,45 @@ function FactorDonut() {
                 onChange={setFactor}
             />
 
-            {error ? (
-                <div style={{ marginTop: "0.75rem" }}>
-                    <strong>Donut unavailable</strong>
-                    <div style={{ fontSize: "0.9rem" }}>{error}</div>
-                </div>
-            ) : (
-                <div style={{ marginTop: "1rem" }}>
-                    <Donut
-                        data={data}
-                        selectedCountry={country}
-                        size={400}
-                        innerRatio={0.5}
-                        onClickCountry={(clickedCountry) => {
-                            if (!clickedCountry) return;
-                            if (clickedCountry === "Other EU") return;
+            {/* small gap */}
+            <div style={{ height: "14px" }} />
 
-                            if (typeof setCountry === "function") {
-                                setCountry(clickedCountry);
-                            } else {
-                                console.log("Clicked country:", clickedCountry);
-                            }
-                        }}
-                    />
+            {/* Title + donut together (left on page, title centered over donut) */}
+            <div className="donut-block">
+                <div className="chart-image-title">
+                    {title}
                 </div>
-            )}
+
+                {error ? (
+                    <div style={{ marginTop: "0.75rem" }}>
+                        <strong>Donut unavailable</strong>
+                        <div style={{ fontSize: "0.9rem" }}>{error}</div>
+                    </div>
+                ) : (
+                    <div className="donut-wrap">
+                        <Donut
+                            data={data}
+                            selectedCountry={country}
+                            size={400}
+                            innerRatio={0.5}
+                            onClickCountry={(clickedCountry) => {
+                                if (!clickedCountry) return;
+                                if (clickedCountry === "Other EU") return;
+
+                                if (typeof setCountry === "function") {
+                                    setCountry(clickedCountry);
+                                } else {
+                                    console.log("Clicked country:", clickedCountry);
+                                }
+                            }}
+                        />
+                    </div>
+                )}
+            </div>
         </div>
     );
+
+
 }
 
 export default FactorDonut;
