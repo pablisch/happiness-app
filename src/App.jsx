@@ -16,10 +16,10 @@ function App() {
         <div className="page">
             <header className="header">
                 <h1>
-                    Happiness Across the EU
-                    <span className="subtitle-inline">
-            — Drivers and trends in national happiness scores
-        </span>
+                    Happiness (Ladder) Scores and their Contributory Factors Across the EU from 2021 to 2023
+        {/*            <span className="subtitle-inline">*/}
+        {/*    — Drivers and trends in national happiness scores*/}
+        {/*</span>*/}
                 </h1>
             </header>
 
@@ -43,11 +43,15 @@ function App() {
             </section>
 
             <section className="block">
-                <MapPanel />
+                <TimeLineGraph />
             </section>
 
             <section className="block">
                 <ScoreCard />
+            </section>
+
+            <section className="block">
+                <MapPanel />
             </section>
 
             <section className="block">
@@ -56,10 +60,7 @@ function App() {
 
             <section className="block">
                 <ContributionBarChart />
-            </section>
 
-            <section className="block">
-                <TimeLineGraph />
             </section>
 
             <footer className="footer">
